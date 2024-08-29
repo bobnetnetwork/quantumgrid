@@ -13,17 +13,17 @@ First, create a personal fork of the repository on GitHub. This allows you to fr
 
 Clone your forked repository to your local machine:
 
-\`\`\`bash
+```bash
 git clone https://github.com/bobnetnetwork/quantumgrid.git
-\`\`\`
+```
 
 ### 3. Create a Branch
 
 Create a new branch for your feature or bug fix. Use a descriptive name for your branch:
 
-\`\`\`bash
+```bash
 git checkout -b feature/my-new-feature
-\`\`\`
+```
 
 ### 4. Make Changes
 
@@ -33,17 +33,17 @@ Make your changes to the codebase. Ensure your code adheres to the project's cod
 
 Once you have made your changes, commit them with a clear and descriptive commit message:
 
-\`\`\`bash
+```bash
 git commit -m "Add new feature X to improve Y"
-\`\`\`
+```
 
 ### 6. Push to GitHub
 
 Push your changes to your forked repository on GitHub:
 
-\`\`\`bash
+```bash
 git push origin feature/my-new-feature
-\`\`\`
+```
 
 ### 7. Create a Pull Request
 
