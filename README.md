@@ -1,5 +1,7 @@
 # QuantumGrid
 
+<img src="assets/quantumgrid-logo.png" alt="QuantumGrid Logo" width="200"/>
+
 QuantumGrid is a microservice-based content management system (CMS) designed to provide a flexible, scalable, and efficient way to manage content across multiple channels. This project showcases a microservice architecture utilizing modern technologies such as Spring Boot, PostgreSQL, MongoDB, Docker, and Kubernetes.
 
 ## Overview
