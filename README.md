@@ -8,6 +8,8 @@ The QuantumGrid platform consists of multiple microservices, each responsible fo
 
 For a detailed plan of future developments and enhancements, please refer to the [ROADMAP.md](ROADMAP.md).
 
+To understand the architectural design and inter-service communication, see the [ARCHITECTURE.md](ARCHITECTURE.md) file.
+
 ## Microservice Architecture
 
 The project is built on a microservice architecture with the following services:
