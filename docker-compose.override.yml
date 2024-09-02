@@ -1,0 +1,69 @@
+
+version: '3.8'
+
+services:
+  # Override or extend services for local development
+
+  pg:
+    environment:
+      - 'POSTGRES_DB=quantumgrid_dev'
+      - 'POSTGRES_PASSWORD=devP4ssword!'
+      - 'POSTGRES_USER=quantumgrid_dev'
+    ports:
+      - '5433:5432'  # Override port for local dev
+  
+  mongo:
+    environment:
+      - 'MONGO_INITDB_ROOT_USERNAME=quantumgrid_dev'
+      - 'MONGO_INITDB_ROOT_PASSWORD=devP4ssword!'
+    ports:
+      - '27018:27017'  # Override port for local dev
+  
+  cache:
+    ports:
+      - '6380:6379'  # Override port for local dev
+  
+  mailpit:
+    ports:
+      - '8026:8025'  # Override port for local dev
+  
+  elasticsearch:
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"  # Customize memory settings for local dev
+    ports:
+      - '9201:9200'  # Override port for local dev
+
+  kibana:
+    ports:
+      - '5602:5601'  # Override port for local dev
+
+  minio:
+    environment:
+      - 'MINIO_ROOT_USER=quantumgrid_dev'
+      - 'MINIO_ROOT_PASSWORD=devP4ssword!'
+    ports:
+      - '9002:9000'
+      - '9003:9001'
+
+  rabbitmq:
+    ports:
+      - '5673:5672'
+      - '15673:15672'
+  
+  grafana:
+    environment:
+      - 'GF_SECURITY_ADMIN_PASSWORD=devP4ssword!'  # Set a default password for local dev
+    ports:
+      - '3001:3000'  # Override port for local dev
+
+  prometheus:
+    ports:
+      - '9091:9090'  # Override port for local dev
+
+  jaeger:
+    ports:
+      - '16687:16686'  # Override port for local dev
+
+networks:
+  quantumgrid-dev:
+    driver: bridge
