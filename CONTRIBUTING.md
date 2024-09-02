@@ -1,11 +1,11 @@
 
-# Contributing to QuantumGrid
+# Contributing to QuantumGrid [WIP]
 
 Thank you for considering contributing to QuantumGrid! Your contributions are highly valued and help make this project better for everyone. Please take a moment to review the following guidelines before making any contributions.
 
 ## Table of Contents
 
-- [Contributing to QuantumGrid](#contributing-to-quantumgrid)
+- [Contributing to QuantumGrid \[WIP\]](#contributing-to-quantumgrid-wip)
   - [Table of Contents](#table-of-contents)
   - [How to Contribute](#how-to-contribute)
     - [1. Fork the Repository](#1-fork-the-repository)
@@ -21,6 +21,7 @@ Thank you for considering contributing to QuantumGrid! Your contributions are hi
   - [Code of Conduct](#code-of-conduct)
   - [Getting Help](#getting-help)
   - [Docker Compose Setup for Development](#docker-compose-setup-for-development)
+  - [Security Guidelines](#security-guidelines)
 
 ## How to Contribute
 
@@ -103,6 +104,10 @@ docker-compose -f docker/docker-compose.yml up -d
 ```
 
 Refer to the main [README.md](README.md) for detailed instructions on setting up and using the development environment.
+
+## Security Guidelines
+
+If you discover a security vulnerability, please read our [Security Policy](SECURITY.md) before reporting it.
 
 ---
 

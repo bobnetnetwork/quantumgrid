@@ -1,11 +1,10 @@
 
-# QuantumGrid Architecture
-
+# QuantumGrid Architecture [WIP]
 This document provides a detailed overview of the QuantumGrid architecture, outlining its microservices, data flows, and core components. The architecture is designed to be modular, scalable, and easy to maintain.
 
 ## Table of Contents
 
-- [QuantumGrid Architecture](#quantumgrid-architecture)
+- [QuantumGrid Architecture \[WIP\]](#quantumgrid-architecture-wip)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
     - [Key Features](#key-features)
@@ -17,6 +16,8 @@ This document provides a detailed overview of the QuantumGrid architecture, outl
     - [Message Queue (RabbitMQ)](#message-queue-rabbitmq)
   - [Integration and Deployment](#integration-and-deployment)
     - [Monitoring and Logging](#monitoring-and-logging)
+  - [Deployment Strategy](#deployment-strategy)
+  - [Testing Strategy](#testing-strategy)
   - [Future Enhancements](#future-enhancements)
 
 ## Overview
@@ -78,6 +79,14 @@ QuantumGrid is containerized using Docker and orchestrated with Docker Compose f
 - **Prometheus** and **Grafana** are used for monitoring service health, performance metrics, and visualizing data.
 - **Jaeger** is integrated for distributed tracing, enabling performance analysis and debugging across microservices.
 - **ELK Stack (Elasticsearch, Logstash, Kibana)** is set up for centralized logging and log analysis.
+
+## Deployment Strategy
+
+For detailed instructions on deploying QuantumGrid, refer to our [Deployment Guide](DEPLOYMENT.md).
+
+## Testing Strategy
+
+For information on how to test the various components, see the [Testing Guide](TESTING.md).
 
 ## Future Enhancements
 

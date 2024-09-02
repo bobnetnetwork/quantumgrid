@@ -9,6 +9,11 @@ QuantumGrid is a microservice-based content management system (CMS) designed to 
 - [Architecture](ARCHITECTURE.md)
 - [Roadmap](ROADMAP.md)
 - [Contributing](CONTRIBUTING.md)
+- [Code of Conduct](#code-of-conduct)
+- [Security Policy](#security-policy)
+- [Testing](#testing)
+- [Deployment Guide](#deployment-guide)
+- [Environment Configuration](#environment-configuration)
 - [License](LICENSE)
 - [Overview](#overview)
 - [Getting Starded](#getting-started)
@@ -29,6 +34,26 @@ The QuantumGrid platform consists of multiple microservices, each responsible fo
 ## Getting Started
 
 To get started with the QuantumGrid platform, clone the repositories and follow the setup instructions in each microservice's README file. For client applications, refer to the specific setup guides in their respective repositories.
+
+## Code of Conduct
+
+We ask all contributors to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## Security Policy
+
+Please refer to our [Security Policy](SECURITY.md) for guidelines on reporting vulnerabilities.
+
+## Testing
+
+Instructions for testing can be found in [TESTING.md](TESTING.md).
+
+## Deployment Guide
+
+For detailed deployment instructions, please refer to the [Deployment Guide](DEPLOYMENT.md).
+
+## Environment Configuration
+
+Check the [.env.example](.env.example) file for an example of environment variables configuration.
 
 ## Development Environment Setup
 

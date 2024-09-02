@@ -1,11 +1,11 @@
 
-# QuantumGrid Deployment Guide
+# QuantumGrid Deployment Guide [WIP]
 
 This document provides a comprehensive guide to deploying QuantumGrid in various environments. Whether you are setting up a local development environment, deploying to a staging server, or preparing for a production release, this guide will help you through the process.
 
 ## Table of Contents
 
-- [QuantumGrid Deployment Guide](#quantumgrid-deployment-guide)
+- [QuantumGrid Deployment Guide \[WIP\]](#quantumgrid-deployment-guide-wip)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Prerequisites](#prerequisites)

@@ -1,18 +1,23 @@
 
-# Testing QuantumGrid
+# Testing QuantumGrid [WIP]
 
 This document outlines the testing strategies and guidelines for the QuantumGrid project. Ensuring that the code is thoroughly tested is crucial to maintaining the stability and reliability of the platform.
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Unit Testing](#unit-testing)
-- [Integration Testing](#integration-testing)
-- [End-to-End Testing](#end-to-end-testing)
-- [Test Coverage](#test-coverage)
-- [Running Tests](#running-tests)
-- [Tools and Frameworks](#tools-and-frameworks)
-- [Best Practices](#best-practices)
+- [Testing QuantumGrid \[WIP\]](#testing-quantumgrid-wip)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Unit Testing](#unit-testing)
+  - [Integration Testing](#integration-testing)
+  - [End-to-End Testing](#end-to-end-testing)
+  - [Test Coverage](#test-coverage)
+  - [Running Tests](#running-tests)
+    - [Running Unit Tests](#running-unit-tests)
+    - [Running Integration Tests](#running-integration-tests)
+    - [Running End-to-End Tests](#running-end-to-end-tests)
+  - [Tools and Frameworks](#tools-and-frameworks)
+  - [Best Practices](#best-practices)
 
 ## Overview
 
