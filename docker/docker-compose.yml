@@ -1,0 +1,114 @@
+name: qua-grid
+services:
+  pg:
+    container_name: ${COMPOSE_PROJECT_NAME}_pg
+    hostname: ${COMPOSE_PROJECT_NAME}_pg
+    image: postgres:16
+    environment:
+      - 'POSTGRES_DB=quantumgrid'
+      - 'POSTGRES_PASSWORD=P4ssword!'
+      - 'POSTGRES_USER=quantumgrid'
+    ports:
+      - '5439:5432'
+    volumes:
+      - ../scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+
+  mongo:
+    container_name: ${COMPOSE_PROJECT_NAME}_mongo
+    hostname: ${COMPOSE_PROJECT_NAME}_mongo
+    image: mongo:6.0
+    environment:
+      - 'MONGO_INITDB_ROOT_USERNAME=quantumgrid'
+      - 'MONGO_INITDB_ROOT_PASSWORD=P4ssword!'
+    ports:
+      - '27917:27017'
+    volumes:
+      - ../scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  cache:
+    container_name: ${COMPOSE_PROJECT_NAME}_cache
+    hostname: ${COMPOSE_PROJECT_NAME}_cache
+    image: redis:7
+    environment:
+      - 'ALLOW_EMPTY_PASSWORD=yes'
+      - 'REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL'
+    ports:
+      - '6379:6379'
+
+  mailpit:
+    container_name: ${COMPOSE_PROJECT_NAME}_mailpit
+    hostname: ${COMPOSE_PROJECT_NAME}_mailpit
+    image: axllent/mailpit
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    environment:
+      - 'MP_MAX_MESSAGES=5000'
+      - 'MP_DATABASE=/data/mailpit.db'
+      - 'MP_SMTP_AUTH_ACCEPT_ANY=1'
+      - 'MP_SMTP_AUTH_ALLOW_INSECURE=1'
+
+  elasticsearch:
+    container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    hostname: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - '9200:9200'
+    networks:
+      - elk
+
+  logstash:
+    container_name: ${COMPOSE_PROJECT_NAME}_logstash
+    hostname: ${COMPOSE_PROJECT_NAME}_logstash
+    image: docker.elastic.co/logstash/logstash:8.9.0
+    volumes:
+      - ../config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    environment:
+      - xpack.monitoring.elasticsearch.hosts=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
+
+  kibana:
+    container_name: ${COMPOSE_PROJECT_NAME}_kibana
+    hostname: ${COMPOSE_PROJECT_NAME}_kibana
+    image: docker.elastic.co/kibana/kibana:8.9.0
+    environment:
+      - ELASTICSEARCH_HOSTS=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
+
+  minio:
+    container_name: ${COMPOSE_PROJECT_NAME}_minio
+    hostname: ${COMPOSE_PROJECT_NAME}_minio
+    image: minio/minio
+    environment:
+      - 'MINIO_ROOT_USER=quantumgrid'
+      - 'MINIO_ROOT_PASSWORD=P4ssword!'
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - miniodata:/data
+    command: server /data --console-address ":9001"
+
+volumes:
+  esdata:
+    driver: local
+  miniodata:
+    driver: local
+
+networks:
+  elk:
+    driver: bridge

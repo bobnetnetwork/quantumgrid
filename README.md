@@ -39,20 +39,25 @@ In addition to the backend microservices, QuantumGrid also includes two client a
 ## Technology Stack
 
 ### Backend
+
 - **Java**, **Spring Boot**, **Spring Cloud**
 
 ### Databases
+
 - **PostgreSQL**: For structured data and relational storage.
 - **MongoDB**: For unstructured data and flexible document storage.
 
 ### Frontend
+
 - **React**, **Angular**, or **Vue**: Modern JavaScript frameworks for building client-side applications.
 
 ### Containerization and Orchestration
+
 - **Docker**: Containerization of microservices and client applications.
 - **Kubernetes**: Orchestration of containers for scalability and resilience.
 
 ### Build Tools
+
 - **Maven**: For managing dependencies and building Java-based microservices.
 
 ### Continuous Integration and Code Quality
