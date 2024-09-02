@@ -1,8 +1,8 @@
 name: qua-grid
 services:
   pg:
-    container_name: ${COMPOSE_PROJECT_NAME}_pg
-    hostname: ${COMPOSE_PROJECT_NAME}_pg
+    container_name: qua-grid-pg
+    hostname: qua-grid-pg
     image: postgres:16
     environment:
       - 'POSTGRES_DB=quantumgrid'
@@ -16,8 +16,8 @@ services:
       - quantumgrid-dev
 
   mongo:
-    container_name: ${COMPOSE_PROJECT_NAME}_mongo
-    hostname: ${COMPOSE_PROJECT_NAME}_mongo
+    container_name: qua-grid-mongo
+    hostname: qua-grid-mongo
     image: mongo:6.0
     environment:
       - 'MONGO_INITDB_ROOT_USERNAME=quantumgrid'
@@ -30,8 +30,8 @@ services:
       - quantumgrid-dev
 
   cache:
-    container_name: ${COMPOSE_PROJECT_NAME}_cache
-    hostname: ${COMPOSE_PROJECT_NAME}_cache
+    container_name: qua-grid-cache
+    hostname: qua-grid-cache
     image: redis:7
     environment:
       - 'ALLOW_EMPTY_PASSWORD=yes'
@@ -42,8 +42,8 @@ services:
       - quantumgrid-dev
 
   mailpit:
-    container_name: ${COMPOSE_PROJECT_NAME}_mailpit
-    hostname: ${COMPOSE_PROJECT_NAME}_mailpit
+    container_name: qua-grid-mailpit
+    hostname: qua-grid-mailpit
     image: axllent/mailpit
     ports:
       - '8025:8025'
@@ -56,8 +56,8 @@ services:
       - quantumgrid-dev
 
   elasticsearch:
-    container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
-    hostname: ${COMPOSE_PROJECT_NAME}_elasticsearch
+    container_name: qua-grid-elasticsearch
+    hostname: qua-grid-elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:8.9.0
     environment:
       - discovery.type=single-node
@@ -71,25 +71,26 @@ services:
       - quantumgrid-dev
 
   logstash:
-    container_name: ${COMPOSE_PROJECT_NAME}_logstash
-    hostname: ${COMPOSE_PROJECT_NAME}_logstash
+    container_name: qua-grid-logstash
+    hostname: qua-grid-logstash
     image: docker.elastic.co/logstash/logstash:8.9.0
     volumes:
       - ../config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     environment:
-      - ELASTICSEARCH_HOST=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
-      - xpack.monitoring.elasticsearch.hosts=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
+      - ELASTICSEARCH_HOST=http://qua-grid-elasticsearch:9200
+      - COMPOSE_PROJECT_NAME=qua-grid
+      - xpack.monitoring.elasticsearch.hosts=http://qua-grid-elasticsearch:9200
     depends_on:
       - elasticsearch
     networks:
       - quantumgrid-dev
 
   kibana:
-    container_name: ${COMPOSE_PROJECT_NAME}_kibana
-    hostname: ${COMPOSE_PROJECT_NAME}_kibana
+    container_name: qua-grid-kibana
+    hostname: qua-grid-kibana
     image: docker.elastic.co/kibana/kibana:8.9.0
     environment:
-      - ELASTICSEARCH_HOSTS=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
+      - ELASTICSEARCH_HOSTS=http://qua-grid-elasticsearch:9200
     ports:
       - '5601:5601'
     depends_on:
@@ -98,8 +99,8 @@ services:
       - quantumgrid-dev
 
   minio:
-    container_name: ${COMPOSE_PROJECT_NAME}_minio
-    hostname: ${COMPOSE_PROJECT_NAME}_minio
+    container_name: qua-grid-minio
+    hostname: qua-grid-minio
     image: minio/minio
     environment:
       - 'MINIO_ROOT_USER=quantumgrid'
@@ -114,8 +115,8 @@ services:
       - quantumgrid-dev
 
   rabbitmq:
-    container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
-    hostname: ${COMPOSE_PROJECT_NAME}_rabbitmq
+    container_name: qua-grid-rabbitmq
+    hostname: qua-grid-rabbitmq
     image: rabbitmq:3-management
     environment:
       - RABBITMQ_DEFAULT_USER=quantumgrid
