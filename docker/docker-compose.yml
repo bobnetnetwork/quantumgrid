@@ -12,6 +12,8 @@ services:
       - '5439:5432'
     volumes:
       - ../scripts/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+    networks:
+      - quantumgrid-dev
 
   mongo:
     container_name: ${COMPOSE_PROJECT_NAME}_mongo
@@ -24,6 +26,8 @@ services:
       - '27917:27017'
     volumes:
       - ../scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - quantumgrid-dev
 
   cache:
     container_name: ${COMPOSE_PROJECT_NAME}_cache
@@ -34,6 +38,8 @@ services:
       - 'REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL'
     ports:
       - '6379:6379'
+    networks:
+      - quantumgrid-dev
 
   mailpit:
     container_name: ${COMPOSE_PROJECT_NAME}_mailpit
@@ -47,6 +53,8 @@ services:
       - 'MP_DATABASE=/data/mailpit.db'
       - 'MP_SMTP_AUTH_ACCEPT_ANY=1'
       - 'MP_SMTP_AUTH_ALLOW_INSECURE=1'
+    networks:
+      - quantumgrid-dev
 
   elasticsearch:
     container_name: ${COMPOSE_PROJECT_NAME}_elasticsearch
@@ -61,7 +69,7 @@ services:
     ports:
       - '9200:9200'
     networks:
-      - elk
+      - quantumgrid-dev
 
   logstash:
     container_name: ${COMPOSE_PROJECT_NAME}_logstash
@@ -70,11 +78,12 @@ services:
     volumes:
       - ../config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
     environment:
+      - ELASTICSEARCH_HOST=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
       - xpack.monitoring.elasticsearch.hosts=http://${COMPOSE_PROJECT_NAME}_elasticsearch:9200
     depends_on:
       - elasticsearch
     networks:
-      - elk
+      - quantumgrid-dev
 
   kibana:
     container_name: ${COMPOSE_PROJECT_NAME}_kibana
@@ -87,7 +96,7 @@ services:
     depends_on:
       - elasticsearch
     networks:
-      - elk
+      - quantumgrid-dev
 
   minio:
     container_name: ${COMPOSE_PROJECT_NAME}_minio
@@ -102,13 +111,32 @@ services:
     volumes:
       - miniodata:/data
     command: server /data --console-address ":9001"
+    networks:
+      - quantumgrid-dev
+
+  rabbitmq:
+    container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
+    hostname: ${COMPOSE_PROJECT_NAME}_rabbitmq
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=quantumgrid
+      - RABBITMQ_DEFAULT_PASS=P4ssword!
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    networks:
+      - quantumgrid-dev
 
 volumes:
   esdata:
     driver: local
   miniodata:
     driver: local
+  rabbitmqdata:
+    driver: local
 
 networks:
-  elk:
+  quantumgrid-dev:
     driver: bridge

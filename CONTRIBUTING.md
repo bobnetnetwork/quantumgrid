@@ -49,6 +49,41 @@ git push origin feature/my-new-feature
 
 Go to the original repository on GitHub and open a pull request (PR) from your forked repository. Provide a clear description of the changes you have made and why they are beneficial to the project.
 
+## Setting Up the Development Environment
+
+### Docker Compose Setup
+
+QuantumGrid uses **Docker Compose** to set up the development environment quickly and easily. This includes all necessary services like databases, caching, and message brokers.
+
+1. **Ensure Docker and Docker Compose are installed** on your machine.
+2. Navigate to the \`docker\` directory in your local repository:
+
+```bash
+cd quantumgrid/docker
+```
+
+3. Run the following command to start all necessary services:
+
+```bash
+docker-compose up -d
+```
+
+This will start all the necessary containers, including PostgreSQL, MongoDB, Redis, RabbitMQ, Elasticsearch, Logstash, Kibana, and Minio.
+
+### Resource Requirements
+
+Running the full development environment requires a certain amount of system resources. Here are the recommended minimum requirements:
+
+- **CPU**: Quad-core processor (e.g., Intel i5 or AMD Ryzen 5)
+- **RAM**: At least 8 GB (16 GB recommended for smoother performance)
+- **Disk Space**: At least 10 GB of free disk space
+- **Docker Version**: Docker 20.10 or later
+- **Docker Compose Version**: Docker Compose 1.29 or later
+
+### Note on Resource Usage
+
+The Docker containers for development can consume significant system resources, especially if multiple services are running concurrently. It is recommended to monitor your system's performance and adjust Docker's resource limits if necessary.
+
 ## Code Style Guidelines
 
 - Follow the Java coding standards and conventions.
