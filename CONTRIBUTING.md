@@ -78,7 +78,7 @@ Running the full development environment requires a certain amount of system res
 - **RAM**: At least 8 GB (16 GB recommended for smoother performance)
 - **Disk Space**: At least 10 GB of free disk space
 - **Docker Version**: Docker 20.10 or later
-- **Docker Compose Version**: Docker Compose 1.29 or later
+- **Docker Compose Version**: Docker Compose 3.9 or later
 
 ### Note on Resource Usage
 

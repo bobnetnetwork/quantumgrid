@@ -1,3 +1,5 @@
+version: '3.9'
+
 name: qua-grid
 services:
   pg:
@@ -128,6 +130,29 @@ services:
       - rabbitmqdata:/var/lib/rabbitmq
     networks:
       - quantumgrid-dev
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: qua-grid-prometheus
+    volumes:
+      - ../config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    networks:
+      - quantumgrid-dev
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: qua-grid-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=P4ssword!
+    ports:
+      - '3000:3000'
+    networks:
+      - quantumgrid-dev
+    depends_on:
+      - prometheus
 
 volumes:
   esdata:
