@@ -2,73 +2,158 @@
 
 <img src="assets/quantumgrid-logo.png" alt="QuantumGrid Logo" width="200"/>
 
-QuantumGrid is a microservice-based content management system (CMS) designed to provide a flexible, scalable, and efficient way to manage content across multiple channels. This project showcases a microservice architecture utilizing modern technologies such as Spring Boot, PostgreSQL, MongoDB, Docker, and Kubernetes.
+QuantumGrid is a microservice-based content management system (CMS) designed to provide a flexible, scalable, and efficient way to manage content across multiple channels. This project showcases a microservice architecture utilizing modern technologies such as Spring Boot, PostgreSQL, MongoDB, Docker, and Kubernetes. This repository contains the core components and necessary configurations to set up a complete development environment.
+
+## Table of Contents
+
+- [Architecture](ARCHITECTURE.md)
+- [Roadmap](ROADMAP.md)
+- [Contributing](CONTRIBUTING.md)
+- [License](LICENSE)
+- [Overview](#overview)
+- [Getting Starded](#getting-started)
+- [Development Environment Setup](#development-environment-setup)
+  - [Prerequisites](#prerequisites)
+  - [Directory Structure](#directory-structure)
+  - [Docker Compose Setup](#docker-compose-setup)
+  - [Services Configuration](#services-configuration)
+  - [Monitoring and Tracing](#monitoring-and-tracing)
+  - [Initial Database Setup](#initial-database-setup)
+- [Running the Application](#running-the-application)
+- [Repository Links](#repository-links)
 
 ## Overview
 
 The QuantumGrid platform consists of multiple microservices, each responsible for a specific function within the CMS. This repository serves as a central hub, providing links to individual microservice repositories and detailed documentation.
 
-For a detailed plan of future developments and enhancements, please refer to the [ROADMAP.md](ROADMAP.md).
-
-To understand the architectural design and inter-service communication, see the [ARCHITECTURE.md](ARCHITECTURE.md) file.
-
-## Microservice Architecture
-
-The project is built on a microservice architecture with the following services:
-
-- **User Service**: Manages user authentication, authorization, and profiles.
-- **Post Service**: Handles creation, editing, and management of posts.
-- **Comment Service**: Manages comments on posts and pages.
-- **Page Service**: Responsible for managing static and dynamic pages.
-- **Email Service**: Manages email notifications and communications.
-- **File Storage Service**: Handles file uploads and storage.
-- **Search Service**: Provides full-text search capabilities across content.
-- **MetaSeo Service**: Manages SEO-related metadata for posts and pages.
-- **API Gateway**: Central gateway for routing external requests to appropriate microservices.
-- **Config Server**: Centralized configuration management for all microservices.
-- **Commons**: A shared library containing common utilities, exceptions, and helper functions used across microservices.
-
-## Client Applications
-
-In addition to the backend microservices, QuantumGrid also includes two client applications:
-
-- **Dashboard Client**: A web-based administration interface built using a modern frontend framework (e.g., React, Angular, Vue). It allows administrators and content managers to manage users, content, and monitor analytics. The Dashboard Client integrates with all backend services via the API Gateway.
-  
-- **Frontend Client**: A public-facing website application that dynamically displays content managed through the CMS. The Frontend Client also interacts with the backend via the API Gateway to fetch and render content, providing a seamless user experience.
-
-## Technology Stack
-
-### Backend
-
-- **Java**, **Spring Boot**, **Spring Cloud**
-
-### Databases
-
-- **PostgreSQL**: For structured data and relational storage.
-- **MongoDB**: For unstructured data and flexible document storage.
-
-### Frontend
-
-- **React**, **Angular**, or **Vue**: Modern JavaScript frameworks for building client-side applications.
-
-### Containerization and Orchestration
-
-- **Docker**: Containerization of microservices and client applications.
-- **Kubernetes**: Orchestration of containers for scalability and resilience.
-
-### Build Tools
-
-- **Maven**: For managing dependencies and building Java-based microservices.
-
-### Continuous Integration and Code Quality
-
-- **Jenkins**: Jenkins is used for continuous integration (CI) to automate the build and deployment process. It helps in maintaining consistent builds and deployments across all environments.
-  
-- **SonarQube**: SonarQube is used for continuous inspection of code quality and to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities. It integrates with Jenkins to provide feedback on code quality after every build.
-
 ## Getting Started
 
 To get started with the QuantumGrid platform, clone the repositories and follow the setup instructions in each microservice's README file. For client applications, refer to the specific setup guides in their respective repositories.
+
+## Development Environment Setup
+
+This section provides a step-by-step guide to setting up the development environment for QuantumGrid.
+
+### Prerequisites
+
+Ensure you have the following tools installed:
+
+- Docker
+- Docker Compose
+- Git
+
+### Directory Structure
+
+The directory structure of the repository is as follows:
+
+```plaintext
+.
+|-- ARCHITECTURE.md
+|-- CONTRIBUTING.md
+|-- LICENSE
+|-- README.md
+|-- ROADMAP.md
+|-- assets
+|   `-- quantumgrid-logo.png
+|-- config
+|   |-- logstash.conf
+|   `-- prometheus
+|       `-- prometheus.yml
+|-- docker
+|   `-- docker-compose.yml
+`-- scripts
+    |-- mongo-init.js
+    `-- postgres-init.sh
+```
+
+- **ARCHITECTURE.md**: Detailed overview of the system architecture.
+- **CONTRIBUTING.md**: Guidelines for contributing to the project.
+- **LICENSE**: Project licensing information.
+- **README.md**: Main project documentation.
+- **ROADMAP.md**: Planned features and development milestones.
+- **assets/**: Contains assets like the project logo.
+- **config/**: Configuration files for Logstash and Prometheus.
+- **docker/**: Docker Compose file for setting up the development environment.
+- **scripts/**: Initialization scripts for MongoDB and PostgreSQL.
+
+### Docker Compose Setup
+
+The `docker/docker-compose.yml` file defines the entire development stack, including databases, caching, monitoring tools, and tracing services.
+To start all the services defined in the Docker Compose file, run:
+
+```bash
+docker-compose -f docker/docker-compose.yml up -d
+```
+
+This command will start the following services:
+
+- PostgreSQL
+- MongoDB
+- Redis
+- Mailpit
+- Elasticsearch
+- Logstash
+- Kibana
+- MinIO
+- RabbitMQ
+- Prometheus
+- Grafana
+- Jaeger
+
+### Services Configuration
+
+- **Prometheus**: Configured to scrape metrics from various services. See `config/prometheus/prometheus.yml` for scraping configuration details.
+- **Logstash**: Configured to forward logs to Elasticsearch for centralized logging. See `config/logstash.conf` for Logstash configuration.
+- **Jaeger**: Set up for distributed tracing across microservices to analyze service interactions and performance.
+
+### Monitoring and Tracing
+
+- **Grafana** is accessible at [http://localhost:3000](http://localhost:3000) (username: `admin`, password: `P4ssword!`).
+- **Prometheus** is accessible at [http://localhost:9090](http://localhost:9090).
+- **Jaeger** UI is accessible at [http://localhost:16686](http://localhost:16686).
+- **Kibana** is accessible at [http://localhost:5601](http://localhost:5601).
+
+### Initial Database Setup
+
+#### PostgreSQL
+
+The initial setup for PostgreSQL is handled by the `scripts/postgres-init.sh` script. This script creates necessary users and schemas for different services.
+
+To execute this script, Docker Compose automatically mounts it into the PostgreSQL container:
+
+```bash
+docker-compose up -d pg
+```
+
+The script will:
+
+- Create a main database `quantumgrid`.
+- Create users (`postservice`, `pageservice`, `commentservice`) with corresponding schemas.
+
+#### MongoDB
+
+The MongoDB initialization script `scripts/mongo-init.js` creates multiple databases and users for different services.
+
+To execute this script, Docker Compose automatically mounts it into the MongoDB container:
+
+```bash
+docker-compose up -d mongo
+```
+
+The script will:
+
+- Create databases (`quantumgrid`, `fileservice`, `emailservice`).
+- Create users with appropriate roles.
+
+### Running the Application
+
+After setting up the development environment with Docker Compose, you can start developing or testing the services. Ensure all services are running:
+
+```bash
+docker-compose ps
+```
+
+You can now connect to the services via their respective ports on `localhost`.
 
 ## Repository Links
 
@@ -88,11 +173,3 @@ To get started with the QuantumGrid platform, clone the repositories and follow 
 - **Client Applications:**
   - [Dashboard Client](https://github.com/bobnetnetwork/quantumgrid-dashboard-client)
   - [Frontend Client](https://github.com/bobnetnetwork/quantumgrid-frontend-client)
-
-## Contributing
-
-Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to this project.
-
-## License
-
-This project is licensed under the GPL-3.0 license - see the [LICENSE.md](LICENSE.md) file for details.

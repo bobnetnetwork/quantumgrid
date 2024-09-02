@@ -3,6 +3,25 @@
 
 Thank you for considering contributing to QuantumGrid! Your contributions are highly valued and help make this project better for everyone. Please take a moment to review the following guidelines before making any contributions.
 
+## Table of Contents
+
+- [Contributing to QuantumGrid](#contributing-to-quantumgrid)
+  - [Table of Contents](#table-of-contents)
+  - [How to Contribute](#how-to-contribute)
+    - [1. Fork the Repository](#1-fork-the-repository)
+    - [2. Clone the Repository](#2-clone-the-repository)
+    - [3. Create a Branch](#3-create-a-branch)
+    - [4. Make Changes](#4-make-changes)
+    - [5. Commit Changes](#5-commit-changes)
+    - [6. Push to GitHub](#6-push-to-github)
+    - [7. Create a Pull Request](#7-create-a-pull-request)
+  - [Code Style Guidelines](#code-style-guidelines)
+  - [Reporting Issues](#reporting-issues)
+  - [Suggesting Enhancements](#suggesting-enhancements)
+  - [Code of Conduct](#code-of-conduct)
+  - [Getting Help](#getting-help)
+  - [Docker Compose Setup for Development](#docker-compose-setup-for-development)
+
 ## How to Contribute
 
 ### 1. Fork the Repository
@@ -49,41 +68,6 @@ git push origin feature/my-new-feature
 
 Go to the original repository on GitHub and open a pull request (PR) from your forked repository. Provide a clear description of the changes you have made and why they are beneficial to the project.
 
-## Setting Up the Development Environment
-
-### Docker Compose Setup
-
-QuantumGrid uses **Docker Compose** to set up the development environment quickly and easily. This includes all necessary services like databases, caching, and message brokers.
-
-1. **Ensure Docker and Docker Compose are installed** on your machine.
-2. Navigate to the \`docker\` directory in your local repository:
-
-```bash
-cd quantumgrid/docker
-```
-
-3. Run the following command to start all necessary services:
-
-```bash
-docker-compose up -d
-```
-
-This will start all the necessary containers, including PostgreSQL, MongoDB, Redis, RabbitMQ, Elasticsearch, Logstash, Kibana, and Minio.
-
-### Resource Requirements
-
-Running the full development environment requires a certain amount of system resources. Here are the recommended minimum requirements:
-
-- **CPU**: Quad-core processor (e.g., Intel i5 or AMD Ryzen 5)
-- **RAM**: At least 8 GB (16 GB recommended for smoother performance)
-- **Disk Space**: At least 10 GB of free disk space
-- **Docker Version**: Docker 20.10 or later
-- **Docker Compose Version**: Docker Compose 3.9 or later
-
-### Note on Resource Usage
-
-The Docker containers for development can consume significant system resources, especially if multiple services are running concurrently. It is recommended to monitor your system's performance and adjust Docker's resource limits if necessary.
-
 ## Code Style Guidelines
 
 - Follow the Java coding standards and conventions.
@@ -107,5 +91,19 @@ By participating in this project, you agree to abide by our [Code of Conduct](CO
 ## Getting Help
 
 If you need help or have questions, feel free to reach out to the maintainers or open a discussion in the [Discussions section](https://github.com/bobnetnetwork/quantumgrid/discussions).
+
+## Docker Compose Setup for Development
+
+The repository includes a `docker-compose.yml` file located in the `docker` directory, which sets up the entire development stack, including databases, caching, monitoring tools, and tracing services.
+
+To start all the services, run the following command:
+
+```bash
+docker-compose -f docker/docker-compose.yml up -d
+```
+
+Refer to the main [README.md](README.md) for detailed instructions on setting up and using the development environment.
+
+---
 
 Thank you for contributing to QuantumGrid!
